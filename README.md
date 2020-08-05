@@ -1,8 +1,3 @@
 # Perceptron_c++
-
-<head>
-  
-</head>
-<body>
-  
-</body>  
+<p>Library for perceptron on C++. The exaple code will loaded later.</p>
+<p>Description published on harb.com<p>
