@@ -16,7 +16,7 @@ double NeuralNet::debug_getWeights(uint16_t n1, uint16_t n2, uint8_t L) {
 	return this->weights[n1][n2][L];
 }
 
-void NeuralNet::Do_it(uint16_t size, double *data) {
+void NeuralNet::Forward(uint16_t size, double *data) {
 	for (int n = 0; n < size; n++) {
 		neurons[n][0][0] = data[n];
 		neurons[n][1][0] = Func(neurons[n][0][0]);
@@ -39,10 +39,10 @@ void NeuralNet::getResult(uint16_t size, double* data) {
 	}
 }
 
-void NeuralNet::learnBackpropagation(double* data, double* ans, double acs, double k) {  
+void NeuralNet::learnBackpropagation(double* data, double* ans, double acs, double k) {  //k - количество эпох обучения acs- скорость обучения
 	for (uint32_t e = 0; e < k; e++) {
 		double* errors = new double[neuronsInLayers[numLayers - 1]];
-		Do_it(neuronsInLayers[0], data);
+		Forward(neuronsInLayers[0], data);
 		getResult(neuronsInLayers[numLayers - 1], errors);
 		for (uint16_t n = 0; n < neuronsInLayers[numLayers - 1]; n++) {
 			neurons[n][2][numLayers - 1] = (ans[n] - neurons[n][1][numLayers - 1]) * (neurons[n][1][numLayers - 1]) * (1 - neurons[n][1][numLayers - 1]);
@@ -71,6 +71,7 @@ uint32_t NeuralNet::MaxEl(uint16_t size, uint16_t *arr) {
 	for (int i = 0; i < size; i++)if (arr[i] > m)m = arr[i];
 	return m;
 }
+
 
 void NeuralNet::CreateNeurons(uint8_t L, uint16_t *n) {
 	neurons.resize(MaxEl(L, n));
