@@ -1,6 +1,6 @@
 #pragma once
-#ifndef NEURO_H
-#define NEURO_H
+#ifndef __NEURO_H__
+#define __NEURO_H__
 
 #include <vector>
 #include <math.h>
@@ -11,7 +11,7 @@ public:
     NeuralNet(uint8_t L, uint16_t *n);
     double debug_getNeurons(uint16_t neu, uint16_t state, uint16_t layer);
     double debug_getWeights(uint16_t n1, uint16_t n2, uint8_t L);
-    void Do_it(uint16_t size, double *data);
+    void Forward(uint16_t size, double *data);
     void getResult(uint16_t size, double* data);
     void learnBackpropagation(double* data, double* ans, double acs, double k);
 private:
